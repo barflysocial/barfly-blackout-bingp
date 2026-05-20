@@ -1,0 +1,9 @@
+{
+  "name": "barfly-blackout-bingo",
+  "version": "2.0.0",
+  "description": "Live phone-based Barfly Blackout Bingo for bars and events.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^4.18.3", "socket.io": "^4.7.5", "qrcode": "^1.5.3" },
+  "engines": { "node": ">=18" }
+}
