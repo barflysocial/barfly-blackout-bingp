@@ -1,0 +1,17 @@
+{
+  "name": "barfly-blackout-bingo",
+  "version": "1.0.0",
+  "description": "Live phone-based competitive BARFLY blackout bingo with powers.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "qrcode": "^1.5.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
