@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: barfly-blackout-bingo
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
