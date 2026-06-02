@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% set page='player-page' %}{% block content %}
+<main class="phone-shell">
+  <section id="title" class="hero-card">
+    <div class="brand-kicker">BARFLY SOCIAL</div><h1>BINGO</h1><div id="sessionStatus" class="pill">COMING SOON</div>
+    <p class="muted">Premium Battle Bingo experience with powers, leaderboards, and live venue play.</p>
+    <div class="bottom-actions"><button onclick="showRSVP()">RSVP</button><button onclick="showMyRSVP()">MY RSVP</button><button onclick="shareGame()">SHARE</button></div>
+  </section>
+  <section id="rsvpPanel" class="panel hidden"><h2>RSVP</h2><input id="phone" placeholder="Mobile number for recovery"><input id="alias" placeholder="Public alias"><button onclick="rsvp()">Confirm RSVP</button><button class="ghost" onclick="hidePanels()">Cancel</button><p id="rsvpMsg" class="notice"></p></section>
+  <section id="waiting" class="panel hidden"><h2>Waiting Room</h2><p class="muted">Your seat is reserved. The game will start when the host begins.</p><div class="tip" id="tipBox">Tip: Complete 4 horizontal rows on a card to earn a random power.</div></section>
+  <section id="game" class="hidden">
+    <div class="topbar"><div><small>CURRENT NUMBER</small><strong id="currentNumber">--</strong></div><div class="timer-ring"><span id="countdown">--</span></div></div>
+    <div class="stat-strip"><span id="points">0 pts</span><span id="blackouts">0 blackouts</span><span id="progress">0/4 power</span></div>
+    <div id="cards" class="cards"></div>
+    <div class="power-dock"><h3>Powers</h3><div id="powers"></div><small id="cooldown" class="muted"></small></div>
+    <details class="panel mini"><summary>Battle Feed</summary><div id="feed"></div></details>
+    <details class="panel mini"><summary>How To Play / Powers</summary><p>Mark the called number only. Horizontal rows earn Bingo credit. Four row credits on a card earn a random power. Blackouts decide rank before points.</p><p><b>Lucky Spot:</b> free clover mark. <b>Freeze:</b> random eligible rival misses a call. <b>Power Swap:</b> swaps an unused power. Defensive powers protect you from attacks.</p></details>
+  </section>
+</main>
+{% endblock %}
