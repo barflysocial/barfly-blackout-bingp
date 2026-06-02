@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>{{ title or 'Barfly Social Bingo' }}</title>
+<meta property='og:title' content='{{ g.title if g is defined else "Barfly Social Bingo" }}'>
+<meta property='og:description' content='{{ (g.venue ~ " • RSVP to play Battle Bingo") if g is defined else "Battle Bingo by Barfly Social" }}'>
+{% if g is defined and g.title_image %}<meta property='og:image' content='{{ g.title_image }}'>{% endif %}
+<link rel='stylesheet' href='{{ url_for("static", filename="style.css") }}'></head><body>{% block body %}{% endblock %}</body></html>
