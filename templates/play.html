@@ -1,0 +1,69 @@
+{% extends 'base.html' %}{% block bodyattrs %}data-player-id="{{p.id}}" data-game-code="{{g.code}}"{% endblock %}{% block content %}
+<div class="wrap player-shell">
+  <div class="topbar player-head">
+    <div>
+      <div class="brand">Barfly Social Bingo</div>
+      <h1>{{g.title}}</h1>
+      <p class="subtitle">{{g.venue}} · Alias: {{p.alias}}</p>
+    </div>
+    <a class="btn ghost" href="/game/{{g.code}}">Title</a>
+  </div>
+
+  <section class="card call-card">
+    <div class="call-grid">
+      <div>
+        <div class="small">Current Call</div>
+        <div id="currentNumber" class="number">{{call_label(g.current_number)}}</div>
+      </div>
+      <div>
+        <div class="small">Next Call</div>
+        <div id="timer" class="countdown">{{g.countdown}}</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="game-tabs">
+    <button class="tab active" data-tab="boardTab">BOARD</button>
+    <button class="tab" data-tab="feedTab">FEED</button>
+    <button class="tab" data-tab="rankingsTab">RANKINGS</button>
+    <button class="tab" data-tab="statsTab">STATS</button>
+  </nav>
+
+  <section id="boardTab" class="tab-panel active">
+    <div class="card compact-card">
+      <div class="small">Power Slots</div>
+      <div id="powers" class="power-slots horizontal"></div>
+      <p class="small">One power may be used per countdown cycle. Attack targets are chosen automatically.</p>
+    </div>
+
+    <div class="card compact-card mini-feed-card">
+      <div class="mini-head"><h2>Recent Activity</h2><button class="link-btn" data-tab-jump="feedTab">View All →</button></div>
+      <div id="miniFeed" class="feed mini-feed"></div>
+    </div>
+
+    <div id="cards" class="board-wrap"></div>
+  </section>
+
+  <section id="feedTab" class="tab-panel">
+    <div class="card"><h2>Battle Feed</h2><div id="feed" class="feed"></div></div>
+  </section>
+
+  <section id="rankingsTab" class="tab-panel">
+    <div class="card"><h2>Rankings</h2><div id="leaderboard"></div></div>
+  </section>
+
+  <section id="statsTab" class="tab-panel">
+    <div class="grid grid3">
+      <div class="glass"><b>Points</b><h2 id="points">{{p.points}}</h2></div>
+      <div class="glass"><b>Lines Left</b><h2 id="linesLeft">25</h2></div>
+      <div class="glass"><b>Next Power</b><h2 id="progress">0/4</h2></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <details open><summary>❓ How To Play / ⚡ Power Guide</summary>
+        <p>Mark only the exact current called letter-number. The board has 25 lines with 3 numbers per line. Clear a full line to remove it. Every 4 cleared lines earns a random power after at least 10 calls. A Full Clear happens when every line is gone.</p>
+        <p>🍀 Lucky Spot: free spot. 👀 Number Peek: see next number. 🔄 Second Chance: blocks attack. ❄️ Freeze: target misses call. 🚧 Row Block: blocks a line. 🃏 Card Shuffle: shuffles uncalled numbers. 💥 Shield Breaker: removes protection. 🪞 Mirror Attack: reflects an attack. 🔄 Power Swap: swaps powers.</p>
+      </details>
+    </div>
+  </section>
+</div>
+<script>document.body.dataset.gameCode='{{g.code}}'</script>{% endblock %}
