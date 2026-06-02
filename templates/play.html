@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% block bodyattrs %}class="player-app" data-player-id="{{p.id}}" data-game-code="{{g.code}}"{% endblock %}{% block content %}
+<div class="wrap player-shell">
+  <section class="card call-card static-call-card">
+    <div class="call-grid">
+      <div>
+        <div class="small">Current Call</div>
+        <div id="currentNumber" class="number">{{call_label(g.current_number, g.board_mode)}}</div>
+      </div>
+      <div>
+        <div class="small">Next Call</div>
+        <div id="timer" class="countdown">{{g.countdown}}</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="game-tabs">
+    <button class="tab active" data-tab="boardTab">BOARD</button>
+    <button class="tab" data-tab="feedTab">FEED</button>
+    <button class="tab" data-tab="rankingsTab">RANKINGS</button>
+  </nav>
+
+  <section id="boardTab" class="tab-panel active">
+    <div class="card compact-card">
+      <div class="small">Power Slots</div>
+      <div id="powers" class="power-slots horizontal"></div>
+      <p class="small">One power may be used per countdown cycle. Attack targets are chosen automatically.</p>
+    </div>
+
+    <div class="card compact-card mini-feed-card">
+      <div class="mini-head"><h2>Recent Activity</h2><button class="link-btn" data-tab-jump="feedTab">View All →</button></div>
+      <div id="miniFeed" class="feed mini-feed"></div>
+    </div>
+
+    <div id="cards" class="board-wrap"></div>
+  </section>
+
+  <section id="feedTab" class="tab-panel">
+    <div class="card"><h2>Battle Feed</h2><div id="feed" class="feed"></div></div>
+  </section>
+
+  <section id="rankingsTab" class="tab-panel">
+    <div class="card"><h2>Rankings</h2><div id="leaderboard"></div></div>
+  </section>
+</div>
+<script>document.body.dataset.gameCode='{{g.code}}'</script>{% endblock %}
