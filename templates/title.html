@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block bodyattrs %}class="title-screen-app"{% endblock %}
+{% block meta %}<meta property="og:title" content="{{g.title}} @ {{g.venue}}"><meta property="og:description" content="RSVP for Barfly Social Bingo"><meta property="og:url" content="{{share_url}}"><meta property="og:image" content="{{ url_for('static', filename='barfly_social_bingo_title.png', _external=True) }}">{% endblock %}
+{% block content %}
+{% set bg_image = url_for('static', filename='barfly_social_bingo_title.png') %}
+<div class="title-screen" data-game-code="{{g.code}}" style="--title-bg:url('{{ bg_image }}')">
+  <div class="title-screen-overlay"></div>
+</div>
+<div class="bottom-actions centered title-actions">
+  <a class="btn gold title-btn title-btn-rsvp" href="/game/{{g.code}}/rsvp">RSVP</a>
+  <a class="btn ghost title-btn title-btn-my" href="/my-rsvp">MY RSVP</a>
+  <button class="btn title-btn title-btn-share" onclick="openSharePanel({{share_url|tojson}}, {{g.title|tojson}}, {{('Join Battle Bingo at ' ~ g.venue)|tojson}}, '/qr/{{g.code}}.png')">SHARE</button>
+</div>
+<div id="shareModal" class="modal share-modal" onclick="if(event.target===this)closeSharePanel()">
+  <div class="card share-card">
+    <div class="brand">Share Game</div>
+    <h1>Scan or Send Link</h1>
+    <img id="shareQrImg" class="qr-img" src="/qr/{{g.code}}.png" alt="QR code for {{g.title}}">
+    <input id="shareLinkInput" readonly value="{{share_url}}" onclick="this.select()">
+    <div class="host-control-row centered">
+      <button id="nativeShareButton" class="gold">Share Link</button>
+      <button id="copyShareButton" class="ghost">Copy Link</button>
+      <button class="ghost" onclick="closeSharePanel()">Close</button>
+    </div>
+    <p class="small">QR code and link use the same Play URL.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrap">
+  <div class="topbar">
+    <div><div class="brand">Host</div><h1>Sessions</h1><p class="subtitle">Create and run multiple independent Battle Bingo sessions.</p></div>
+    <a class="btn ghost" href="/">Home</a>
+  </div>
+
+  <div class="grid grid2">
+    <form class="card form host-horizontal-form" method="post">
+      <h2>Create New Session</h2>
+      <div class="host-field-row">
+        <div><label>Venue</label><input name="venue" value="Barfly Social"></div>
+        <div><label>Game Starts</label><input name="scheduled_start_at" type="datetime-local"></div>
+        <div><label>Board Display</label><select name="board_mode"><option value="win" selected>WIN Calls: W1-W75 / I1-I75 / N1-N75</option><option value="numbers">Legacy Numbers Only</option></select></div>
+      </div>
+      <div class="host-field-row">
+        <div><label>Title Graphic URL</label><input name="title_image" placeholder="https://...jpg"></div>
+        <div><label>Venue Logo URL</label><input name="venue_logo" placeholder="https://...png"></div>
+        <div><label>Sponsor Banner Text</label><input name="sponsor_text" placeholder="Sponsored by..."></div>
+      </div>
+      <div class="host-field-row compact">
+        <div><label>Countdown</label><select name="countdown"><option>5</option><option selected>10</option><option>15</option><option>20</option><option>30</option></select></div>
+        <div><label>Full Clear Winners</label><input name="triple_winners_needed" type="number" min="1" max="10" value="1"></div>
+        <div><label>Mark Mode</label><select name="mark_mode"><option value="manual">Manual Mark</option><option value="auto">Auto Mark</option></select></div>
+        <div><label>Call Mode</label><select name="call_mode"><option value="manual">Host Call</option><option value="auto">Auto Call</option></select></div>
+      </div>
+      <div class="host-toggle-row">
+        <label><input type="checkbox" name="tv_enabled" checked> Enable TV Board</label>
+        <label><input type="checkbox" name="powers_enabled" checked> Enable Powers</label>
+        <button class="gold">Create Session</button>
+      </div>
+      <input type="hidden" name="blackouts_to_win" value="1">
+    </form>
+
+    <div class="card session-panel">
+      <h2>Session Manager</h2>
+      <p class="small">Each session has its own players, calls, timer, rankings, feed, prize tracking, and TV board.</p>
+      <h3>Active / Open</h3>
+      {% for g in active %}
+        <div class="session-row"><div><a href="/host/{{g.code}}"><b>{{g.title}}</b> @ {{g.venue}}</a><br><span class="small">Code {{g.code}} · {{format_local_datetime(g.scheduled_start_at, g.schedule_timezone) if g.scheduled_start_at else 'No scheduled start'}}</span></div><span class="pill status-{{g.status}}">{{g.status}}</span></div>
+      {% else %}<p class="small">No active sessions.</p>{% endfor %}
+      <h3>Upcoming</h3>
+      {% for g in upcoming %}
+        <div class="session-row"><div><a href="/host/{{g.code}}"><b>{{g.title}}</b> @ {{g.venue}}</a><br><span class="small">Code {{g.code}} · {{format_local_datetime(g.scheduled_start_at, g.schedule_timezone) if g.scheduled_start_at else 'No scheduled start'}}</span></div><span class="pill status-{{g.status}}">{{g.status}}</span></div>
+      {% else %}<p class="small">No upcoming sessions.</p>{% endfor %}
+      <h3>Completed / Cancelled</h3>
+      {% for g in completed[:10] %}
+        <div class="session-row"><div><a href="/host/{{g.code}}"><b>{{g.title}}</b> @ {{g.venue}}</a><br><span class="small">Code {{g.code}}</span></div><span class="pill status-{{g.status}}">{{g.status}}</span></div>
+      {% else %}<p class="small">No completed sessions.</p>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
