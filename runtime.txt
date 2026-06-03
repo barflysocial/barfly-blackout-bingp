@@ -1,0 +1,34 @@
+# Battle Bingo v2 Final Consolidated Build
+
+Render/GitHub-ready Flask app.
+
+## Latest consolidated changes
+- RSVP main screen only shows RSVP, MY RSVP, SHARE.
+- RSVP opens current games; no games shows COMING SOON.
+- Join form uses Alias, Mobile Number, optional Instagram.
+- Multi-session support with session code and QR generated only after session creation.
+- Lobby countdown and calls use server-side timers.
+- WIN mode uses sticky W/I/N header under horizontal power slots.
+- Numbers Only mode hides WIN header.
+- Recent Activity removed from Board screen; Feed is its own tab.
+- Battle Feed shows player gameplay only; host/admin actions are hidden from player/TV feed.
+- Power awards every 5 cleared rows, max 3 powers per game, no duplicates.
+- Powers target the direct ranking rival: player above, or player below if in first.
+- Lucky Spot marks oldest missed called number first before becoming a free mark.
+- Clear Out celebration, timestamp, placement, winner display, TV moment, and finisher lock.
+- Game Over when all numbers are called or configured Clear Out winner limit is reached.
+- Player sees winner screen and returns to RSVP page after game over.
+- Host stays on host screen after ending a game.
+- Host dashboard uses horizontal controls, compact first-place prize tracking, compact reset controls, alias moderation anytime, and live point refresh.
+
+## Render setup
+Build command:
+```
+pip install -r requirements.txt
+```
+Start command:
+```
+gunicorn app:app
+```
+
+Set `SECRET_KEY` and optional `HOST_PIN` environment variables.
