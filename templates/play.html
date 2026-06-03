@@ -1,0 +1,40 @@
+{% extends 'base.html' %}{% block bodyattrs %}class="player-app" data-player-id="{{p.id}}" data-game-code="{{g.code}}"{% endblock %}{% block content %}
+<div class="wrap player-shell">
+  <section class="card call-card static-call-card">
+    <div class="call-grid">
+      <div>
+        <div class="small">Current Call</div>
+        <div id="currentNumber" class="number">{{call_label(g.current_number, g.board_mode)}}</div>
+      </div>
+      <div>
+        <div class="small">Next Call</div>
+        <div id="timer" class="countdown">{{g.countdown}}</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="game-tabs">
+    <button class="tab active" data-tab="boardTab">BOARD</button>
+    <button class="tab" data-tab="feedTab">FEED</button>
+    <button class="tab" data-tab="rankingsTab">RANKINGS</button>
+  </nav>
+
+  <section id="boardTab" class="tab-panel active">
+    <div class="card compact-card power-card">
+      <div class="small">Power Slots</div>
+      <div id="powers" class="power-slots horizontal"></div>
+      <p class="small">Powers: earn 1 power every 3 cleared rows. Hold up to 3 powers. Freeze makes the ranked opponent miss the next call, Fire blocks Freeze, and Recover marks one missed called number.</p>
+    </div>
+
+    <div id="cards" class="board-wrap"></div>
+  </section>
+
+  <section id="feedTab" class="tab-panel">
+    <div class="card"><h2>Battle Feed</h2><div id="feed" class="feed"></div></div>
+  </section>
+
+  <section id="rankingsTab" class="tab-panel">
+    <div class="card"><h2>Rankings</h2><div id="leaderboard"></div></div>
+  </section>
+</div>
+<script>document.body.dataset.gameCode='{{g.code}}'</script>{% endblock %}
